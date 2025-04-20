@@ -18,9 +18,16 @@ test('throws error for invalid characaters', () => {
 
 
 
-// // tests for valid input
-// test('input is valid hexadecimal', () => {
-//     expect(() => addHex('1F', 'A')).not.toThrow(); 
-//     expect(() => addHex('G1', 'A')).toThrow('Invalid hex input'); 
-// });
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import Calculator from '../components/calculator';
 
+// tests negative result
+test('adds two hex numbers in the UI', () => {
+    render(<Calculator />);
+    fireEvent.click(screen.getByText('A'));
+    fireEvent.click(screen.getByText('+'));
+    fireEvent.click(screen.getByText('5'));
+    fireEvent.click(screen.getByText('='));
+    expect(screen.getByTestId('display')).toHaveTextContent('F');
+});
